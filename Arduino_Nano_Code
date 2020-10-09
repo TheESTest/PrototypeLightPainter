@@ -1,0 +1,101 @@
+/*  Elation Sports Technologies LLC
+ *  1 Oct 2020
+ *  
+ *  RGB LED Light Writer Script
+ *  
+ *  www.elationsportstechnologies.com
+ *  
+ */
+
+int LED_pin_red = 5;
+int LED_pin_green = 6;
+int LED_pin_blue = 3;
+
+int r_start = 255;
+int g_start = 0;
+int b_start = 0;
+
+Servo s_red;
+Servo s_green;
+Servo s_blue;
+
+bool rainbowBoolean = true;
+
+const int delay_value = 10;
+
+void setup() {
+  
+  pinMode(LED_pin_red, OUTPUT);
+  pinMode(LED_pin_green, OUTPUT);
+  pinMode(LED_pin_blue, OUTPUT);
+
+  //Enable the user to turn on/off the RGB LED using three buttons/switches
+  if(rainbowBoolean == false){
+
+    s_red.write(180);
+    s_green.write(180);
+    s_blue.write(180);
+    
+    digitalWrite(LED_pin_red, HIGH);
+    digitalWrite(LED_pin_green, HIGH);
+    digitalWrite(LED_pin_blue, HIGH);
+  }
+  else{
+    0;
+  }
+
+}
+
+void loop() {
+  
+  if(rainbowBoolean == false){
+    0; //Do nothing
+  }
+
+  else{
+    //Start with the color red
+    analogWrite(LED_pin_red, r_start);
+    analogWrite(LED_pin_green, g_start);
+    analogWrite(LED_pin_blue, b_start);
+    
+    //Add green
+    for (int i = 0; i <= 255; i++) {
+     analogWrite(LED_pin_green, i);
+     delay(delay_value);
+    }
+    
+    //Remove red
+    for (int i = 255; i >= 0; i--) {
+     analogWrite(LED_pin_red, i);
+     delay(delay_value);
+    }
+    
+    //Add blue
+    for (int i = 0; i <= 255; i++) {
+     analogWrite(LED_pin_blue, i);
+     delay(delay_value);
+    }
+    
+    //Remove green
+    for (int i = 255; i >= 0; i--) {
+     analogWrite(LED_pin_green, i);
+     delay(delay_value);
+    }
+    
+    //Add red
+    for (int i = 0; i <= 255; i++) {
+     analogWrite(LED_pin_red, i);
+     delay(delay_value);
+    }
+    
+    //Remove blue
+    for (int i = 255; i >= 0; i--) {
+     analogWrite(LED_pin_blue, i);
+     delay(delay_value);
+    }
+  }
+
+}
+
+
+
